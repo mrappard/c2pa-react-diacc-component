@@ -12,9 +12,10 @@ import "../styles/diacc.css";
 export interface DIACCL2Props {
   manifest: Manifest;
   moreInfo?: () => void;
+  className?: string;
 }
 
-export default function DIACCL2({ manifest, moreInfo }: DIACCL2Props) {
+export default function DIACCL2({ className, manifest, moreInfo }: DIACCL2Props) {
   const assertion = getDiaccPctfAssertion(manifest);
   const title = getDisplayTitle(manifest, assertion);
   const claimGenerator = getClaimGenerator(manifest);
@@ -22,7 +23,7 @@ export default function DIACCL2({ manifest, moreInfo }: DIACCL2Props) {
   const conformance = assertion?.conformance ?? [];
 
   return (
-    <div className="diacc-card">
+    <div className={`diacc-card ${className}`}>
       <DIACC_Header />
       <div className="diacc-container">
         {manifest.thumbnail ? (

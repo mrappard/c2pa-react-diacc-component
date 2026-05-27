@@ -6,16 +6,17 @@ import "../styles/diacc.css";
 export interface DIACCL1Props {
   manifest: Manifest;
   moreInfo?: () => void;
+  className?: string;
 }
 
-export function DIACCL1({ manifest, moreInfo }: DIACCL1Props) {
+export function DIACCL1({ manifest, moreInfo, className }: DIACCL1Props) {
   const assertion = getDiaccPctfAssertion(manifest);
   const title = getDisplayTitle(manifest, assertion);
   const claimGenerator = getClaimGenerator(manifest);
   const initials = getInitials(claimGenerator);
 
   return (
-    <div className="diacc-card">
+    <div className={`diacc-card ${className}`}>
       <DIACC_Header />
       <div className="diacc-container">
         {manifest.thumbnail ? (
