@@ -13,6 +13,7 @@ import "../styles/diacc.css";
 export interface DIACCL3Props {
   manifest: Manifest;
   moreInfo?: () => void;
+  className?: string;
 }
 
 function renderConformanceEntry(entry: unknown, index: number) {
@@ -40,7 +41,7 @@ function renderConformanceEntry(entry: unknown, index: number) {
   );
 }
 
-export default function DIACCL3({ manifest, moreInfo }: DIACCL3Props) {
+export default function DIACCL3({ manifest, moreInfo, className }: DIACCL3Props) {
   const assertion = getDiaccPctfAssertion(manifest);
   const title = getDisplayTitle(manifest, assertion);
   const claimGenerator = getClaimGenerator(manifest);
@@ -48,7 +49,7 @@ export default function DIACCL3({ manifest, moreInfo }: DIACCL3Props) {
   const conformance = assertion?.conformance ?? [];
 
   return (
-    <div className="diacc-card">
+    <div className={`diacc-card ${className}`}>
       <DIACC_Header />
       <div className="diacc-container">
         {manifest.thumbnail ? (

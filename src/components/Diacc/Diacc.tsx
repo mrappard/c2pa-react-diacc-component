@@ -4,6 +4,7 @@ import { DIACCL1 } from './levels/L1/DIACCL1'
 import DIACCL2 from './levels/L2/DIACCL2';
 import DIACCL3 from './levels/L3/DIACCL3';
 import { Manifest, PluginC2PA } from 'c2pa-react-component-types';
+import { getDiaccPctfAssertion } from './diaccAssertion';
 
 export const DIACCManifest: PluginC2PA = ({ manifest, level, className }) => {
   const [levelOfDetail, setLevelOfDetail] = React.useState(level || 1)
@@ -18,22 +19,29 @@ export const DIACCManifest: PluginC2PA = ({ manifest, level, className }) => {
     manifest.manifests[0];
 
   if (!activeManifest) {
-    return <div className={className}>No active manifest found.</div>
+    return null;
+  }
+
+  if (!getDiaccPctfAssertion(activeManifest)) {
+    return null;
   }
 
   switch (levelOfDetail) {
-    case 1: return <DIACCL1 manifest={activeManifest} moreInfo={() => {
+    case 1: return <DIACCL1 className={className} manifest={activeManifest} moreInfo={() => {
       setLevelOfDetail(2);
     }} />
-    case 2: return <DIACCL2 manifest={activeManifest} moreInfo={() => {
+    case 2: return <DIACCL2 className={className} manifest={activeManifest} moreInfo={() => {
       setLevelOfDetail(3);
     }} />
-    case 3: return <DIACCL3 manifest={activeManifest} moreInfo={() => {
+    case 3: return <DIACCL3 className={className} manifest={activeManifest} moreInfo={() => {
       setLevelOfDetail(1);
     }} />
   }
 
   return <div>Level Of Detail Not Selected</div>
 }
+DIACCManifest.knownAssertions = ['diacc.pctf.conformance']
+  
+
 
 export default DIACCManifest
