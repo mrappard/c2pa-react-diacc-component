@@ -40,5 +40,8 @@ export const DIACCManifest: PluginC2PA = ({ manifest, level, className }) => {
 
   return <div>Level Of Detail Not Selected</div>
 }
+DIACCManifest.knownAssertions = ['diacc.pctf.conformance']
+  
+
 
 export default DIACCManifest
